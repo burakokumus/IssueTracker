@@ -31,18 +31,20 @@ public class DatabaseManager
 		return conn;
 	}
 
-	public void addUser(String password, String userName)
+	public boolean addUser(String password, String userName)
 	{
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(USER_INSERT_STATEMENT))
 		{
 			pstmt.setString(1, password);
 			pstmt.setString(2, userName);
 			pstmt.executeUpdate();
+			return true;
 			
 		}
 		catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 
