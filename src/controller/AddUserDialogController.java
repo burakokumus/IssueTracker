@@ -38,11 +38,11 @@ public class AddUserDialogController
 		
 		if(added)
 		{
-			message = Messages.getString("userAdded");
+			message = Messages.getString("issueAdded");
 		}
 		else
 		{
-			message = Messages.getString("userAlreadyExists");
+			message = Messages.getString("issueAlreadyExists");
 		}
 		int showOptionDialog = JOptionPane.showOptionDialog(addUserDialogView, message, "",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
@@ -51,10 +51,6 @@ public class AddUserDialogController
 		{
 			addUserDialogView.dispose();
 			
-		}
-		else
-		{
-			System.out.println("error");
 		}
 	}
 }

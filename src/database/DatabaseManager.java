@@ -11,6 +11,7 @@ public class DatabaseManager
 	// Constant SQL statements
 	private final String URL = "jdbc:sqlite:C:\\Users\\burak\\eclipse-workspace\\IssueTracker\\IssueTrackerDatabase.db";
 	private final String USER_INSERT_STATEMENT = "INSERT INTO users(password, user_name) VALUES(?, ?)";
+	private final String ISSUE_INSERT_STATEMENT = "INSERT INTO issues(title, type, priority, author, description) VALUES(?, ?, ?, ?, ?)";
 
 	/**
 	 * Provides connection to the SQL server
@@ -39,7 +40,7 @@ public class DatabaseManager
 			pstmt.setString(2, userName);
 			pstmt.executeUpdate();
 			return true;
-			
+
 		}
 		catch (SQLException e)
 		{
@@ -48,4 +49,24 @@ public class DatabaseManager
 		}
 	}
 
+	public boolean addIssue(String title, String type, int priority, String author, String description)
+	{
+		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(ISSUE_INSERT_STATEMENT))
+		{
+			pstmt.setString(1, title);
+			pstmt.setString(2, type);
+			pstmt.setInt(3, priority);
+			pstmt.setString(4, author);
+			pstmt.setString(5, description);
+			pstmt.executeUpdate();
+			System.out.println("data added");
+			return true;
+
+		}
+		catch (SQLException e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 }

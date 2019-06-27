@@ -2,6 +2,7 @@ package controller;
 
 
 import database.DatabaseManager;
+import view.AddIssueDialogView;
 import view.AddUserDialogView;
 import view.View;
 
@@ -18,14 +19,21 @@ public class Controller
 
 	public void initController()
 	{
-		//view.getAddIssueButton().addActionListener(e -> addIssue());
+		view.getAddIssueButton().addActionListener(e -> addIssue());
 		view.getAddUserButton().addActionListener(e -> addUser());
 	}
 
+	/**
+	 * Action Listener for the Add Issue Button
+	 */
 	public void addIssue()
 	{
-		view.getDefaultTableModel().addRow(new Object[]
-		{ 1, "Task 1" });
+		AddIssueDialogView addIssueDialogView = new AddIssueDialogView();
+		addIssueDialogView.showScreen();
+		AddIssueDialogController addIssueDialogController = new AddIssueDialogController(addIssueDialogView);
+		addIssueDialogController.initController();
+		/*view.getDefaultTableModel().addRow(new Object[]
+		{ 1, "Task 1" });*/
 	}
 
 	/**
@@ -38,6 +46,8 @@ public class Controller
 		AddUserDialogController addUserDialogController = new AddUserDialogController(addUserDialogView);
 		addUserDialogController.initController();
 	}
+	
+	
 	
 	public void setCurrentUserName(String userName)
 	{
