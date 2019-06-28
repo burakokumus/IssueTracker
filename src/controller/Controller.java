@@ -1,25 +1,35 @@
 package controller;
 
 
+import java.util.ArrayList;
+
+import database.DatabaseManager;
 import view.AddIssueDialogView;
 import view.AddUserDialogView;
 import view.View;
+import model.Issue;
 
 public class Controller
 {
 	private View view;
 	private String currentUserName;
+	private DatabaseManager dbm;
+	
 
 	public Controller(View viewInput)
 	{
 		this.view = viewInput;
 		this.currentUserName = "";
+		dbm = new DatabaseManager();
 	}
 
 	public void initController()
 	{
 		view.getAddIssueButton().addActionListener(e -> addIssue());
 		view.getAddUserButton().addActionListener(e -> addUser());
+		ArrayList<Issue> issueList = dbm.getAllIssues();
+		for(Issue i : issueList)
+			view.addIssueToJTable(i.getId(), i.getTitle(), i.getType(), i.getPriority(), i.getAuthor(), i.getDescription(), i.getState());
 	}
 
 	/**

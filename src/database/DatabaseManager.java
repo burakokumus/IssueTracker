@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Issue;
 
@@ -16,6 +17,7 @@ public class DatabaseManager
 	private final String USER_INSERT_STATEMENT = "INSERT INTO users(password, user_name) VALUES(?, ?)";
 	private final String ISSUE_INSERT_STATEMENT = "INSERT INTO issues(title, type, priority, author, description) VALUES(?, ?, ?, ?, ?)";
 	private final String GET_ISSUE_STATEMENT = "SELECT * from issues WHERE title = ?";
+	private final String GET_ALL_ISSUES_STATEMENT = "SELECT * from issues";
 
 	/**
 	 * Provides connection to the SQL server
@@ -83,14 +85,13 @@ public class DatabaseManager
 		String issueAuthor = "";
 		String issueDescription = "";
 		String issueState = "";
-		
-		
+
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(GET_ISSUE_STATEMENT))
 		{
 
 			pstmt.setString(1, title);
 			ResultSet executeQuery = pstmt.executeQuery();
-			if(executeQuery.next())
+			if (executeQuery.next())
 			{
 				issueID = executeQuery.getInt("issue_id");
 				issueTitle = executeQuery.getString("title");
@@ -100,12 +101,52 @@ public class DatabaseManager
 				issueDescription = executeQuery.getString("description");
 				issueState = executeQuery.getString("state");
 			}
-			
-			Issue result = new Issue(issueID, issueTitle, issueType, issuePriority, 
-					issueAuthor, issueDescription, issueState);
+
+			Issue result = new Issue(issueID, issueTitle, issueType, issuePriority, issueAuthor, issueDescription,
+					issueState);
 			return result;
-			
-			
+
+		}
+		catch (SQLException e)
+		{
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public ArrayList<Issue> getAllIssues()
+	{
+		int issueID = -1;
+		String issueTitle = "";
+		String issueType = "";
+		int issuePriority = -1;
+		String issueAuthor = "";
+		String issueDescription = "";
+		String issueState = "";
+
+		ArrayList<Issue> result = new ArrayList<>();
+
+		try (Connection conn = this.connect();
+				PreparedStatement pstmt = conn.prepareStatement(GET_ALL_ISSUES_STATEMENT))
+		{
+
+			ResultSet executeQuery = pstmt.executeQuery();
+			while (executeQuery.next())
+			{
+				issueID = executeQuery.getInt("issue_id");
+				issueTitle = executeQuery.getString("title");
+				issueType = executeQuery.getString("type");
+				issuePriority = executeQuery.getInt("priority");
+				issueAuthor = executeQuery.getString("author");
+				issueDescription = executeQuery.getString("description");
+				issueState = executeQuery.getString("state");
+				Issue temp = new Issue(issueID, issueTitle, issueType, issuePriority, issueAuthor, issueDescription,
+						issueState);
+				result.add(temp);
+			}
+
+			return result;
+
 		}
 		catch (SQLException e)
 		{

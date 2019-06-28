@@ -8,11 +8,12 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
 
 // https://stackoverflow.com/questions/27815400/retrieving-data-from-jdbc-database-into-jtable
 
@@ -27,6 +28,7 @@ public class View
 	private JPanel panel;
 	private JButton addIssueButton;
 	private JButton addUserButton;
+	private DefaultTableCellRenderer centerRenderer;
 
 	public View()
 	{
@@ -82,6 +84,9 @@ public class View
 		defaultTableModel = new DefaultTableModel(new String[]
 		{ "Issue Id", "Title", "Type", "Priority", "Author", "Description", "State" }, 0);
 		table.setModel(defaultTableModel);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		table.setDefaultRenderer(String.class, centerRenderer);
 		scrollPane.setViewportView(table);
 
 		frame.pack();
@@ -107,8 +112,8 @@ public class View
 		this.currentUserName = userName;
 	}
 
-	public void addIssueToJTable(int issueID, String title, String type, int priority, String author, String description,
-			String state)
+	public void addIssueToJTable(int issueID, String title, String type, int priority, String author,
+			String description, String state)
 	{
 		defaultTableModel.addRow(new String[]
 		{ Integer.toString(issueID), title, type, Integer.toString(priority), author, description, state });
