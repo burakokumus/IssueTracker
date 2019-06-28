@@ -77,19 +77,21 @@ public class AddUserDialogView extends JDialog
 		gbc_passwordField.gridx = 1;
 		gbc_passwordField.gridy = 1;
 		getContentPane().add(passwordField, gbc_passwordField);
-		
+
 		addUserButton = new JButton("Add");
 		gbc_addUserButton = new GridBagConstraints();
 		gbc_addUserButton.gridx = 2;
 		gbc_addUserButton.gridy = 1;
 		getContentPane().add(addUserButton, gbc_addUserButton);
+
+		this.getRootPane().setDefaultButton(addUserButton);
 	}
 
 	public void showScreen()
 	{
 		this.setVisible(true);
 	}
-	
+
 	public JButton getAddUserButton()
 	{
 		return addUserButton;

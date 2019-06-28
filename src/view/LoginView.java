@@ -78,6 +78,7 @@ public class LoginView extends JDialog
 		gbc_loginButton.gridy = 5;
 		getContentPane().add(loginButton, gbc_loginButton);
 
+		this.getRootPane().setDefaultButton(loginButton);
 		this.setVisible(true);
 		this.pack();
 	}

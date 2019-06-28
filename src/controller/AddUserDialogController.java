@@ -28,29 +28,28 @@ public class AddUserDialogController
 	{
 		String userName = addUserDialogView.getUserName();
 		String password = addUserDialogView.getPassword();
-		if(userName.trim().length() == 0 || password.trim().length() == 0)
+		if (userName.trim().length() == 0 || password.trim().length() == 0)
 		{
 			return;
 		}
 		boolean added = dbm.addUser(password, userName);
-//		(addUserDialogView, Messages.getString("userAdded"));
 		String message = "";
-		
-		if(added)
+
+		if (added)
 		{
-			message = Messages.getString("issueAdded");
+			message = Messages.getString("userAdded");
 		}
 		else
 		{
-			message = Messages.getString("issueAlreadyExists");
+			message = Messages.getString("userAlreadyExists");
 		}
-		int showOptionDialog = JOptionPane.showOptionDialog(addUserDialogView, message, "",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+		int showOptionDialog = JOptionPane.showOptionDialog(addUserDialogView, message, "", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
 		if (added && (showOptionDialog == 0 || showOptionDialog == -1))
 		{
 			addUserDialogView.dispose();
-			
+
 		}
 	}
 }

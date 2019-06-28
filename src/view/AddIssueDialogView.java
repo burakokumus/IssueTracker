@@ -83,7 +83,8 @@ public class AddIssueDialogView extends JDialog
 		gbc_typeLabel.gridy = 1;
 		getContentPane().add(typeLabel, gbc_typeLabel);
 
-		typeComboBox = new JComboBox<>(new String[] {"Type1", "Type2", "Type3"});
+		typeComboBox = new JComboBox<>(new String[]
+		{ "Type1", "Type2", "Type3" });
 		gbc_typeComboBox = new GridBagConstraints();
 		gbc_typeComboBox.insets = new Insets(5, 5, 5, 0);
 		gbc_typeComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -117,7 +118,8 @@ public class AddIssueDialogView extends JDialog
 		gbc_authorLabel.gridy = 3;
 		getContentPane().add(authorLabel, gbc_authorLabel);
 
-		authorComboBox = new JComboBox<>(new String[] {"Author1", "Author2", "Author3"});
+		authorComboBox = new JComboBox<>(new String[]
+		{ "Author1", "Author2", "Author3" });
 		gbc_authorComboBox = new GridBagConstraints();
 		gbc_authorComboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_authorComboBox.insets = new Insets(5, 5, 5, 5);
@@ -150,6 +152,7 @@ public class AddIssueDialogView extends JDialog
 		gbc_addIssueButton.gridy = 5;
 		getContentPane().add(addIssueButton, gbc_addIssueButton);
 
+		this.getRootPane().setDefaultButton(addIssueButton);
 		this.pack();
 	}
 

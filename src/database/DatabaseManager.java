@@ -18,7 +18,8 @@ public class DatabaseManager
 	private final String ISSUE_INSERT_STATEMENT = "INSERT INTO issues(title, type, priority, author, description) VALUES(?, ?, ?, ?, ?)";
 	private final String GET_ISSUE_STATEMENT = "SELECT * FROM issues WHERE title = ?";
 	private final String GET_ALL_ISSUES_STATEMENT = "SELECT * from issues";
-	private final String LOGIN_CHECK = "Select * FROM users WHERE user_name = ? AND password = ?";
+	private final String LOGIN_CHECK_STATEMENT = "Select * FROM users WHERE user_name = ? AND password = ?";
+	private final String GET_RANK_STATEMENT = "Select rank FROM users WHERE user_name = ?";
 
 	/**
 	 * Provides connection to the SQL server
@@ -43,7 +44,7 @@ public class DatabaseManager
 	{
 		if (userName.trim().length() == 0 || password.trim().length() == 0)
 			return false;
-		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(LOGIN_CHECK))
+		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(LOGIN_CHECK_STATEMENT))
 		{
 
 			pstmt.setString(1, userName);
@@ -62,6 +63,26 @@ public class DatabaseManager
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
+	
+	public int getUserRank(String userName)
+	{
+		int result = -1;
+		try(Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(GET_RANK_STATEMENT))
+		{
+			pstmt.setString(1, userName);
+			
+			ResultSet executeQuery = pstmt.executeQuery();
+			if (executeQuery.next())
+			{
+				result = executeQuery.getInt("rank");
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+		}
+		return result;
 	}
 
 	public boolean addUser(String password, String userName)
