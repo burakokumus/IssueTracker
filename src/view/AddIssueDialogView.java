@@ -27,10 +27,6 @@ public class AddIssueDialogView extends JDialog
 	private JLabel priorityLabel;
 	private GridBagConstraints gbc_priorityLabel;
 	private GridBagConstraints gbc_priorityTextField;
-	private JLabel authorLabel;
-	private GridBagConstraints gbc_authorLabel;
-	private JComboBox<String> authorComboBox;
-	private GridBagConstraints gbc_authorComboBox;
 	private JLabel descriptionLabel;
 	private JTextField descriptionTextField;
 	private JButton addIssueButton;
@@ -110,22 +106,6 @@ public class AddIssueDialogView extends JDialog
 		getContentPane().add(priorityTextField, gbc_priorityTextField);
 		priorityTextField.setColumns(10);
 
-		authorLabel = new JLabel(Messages.getString("AddIssueDialogView.lblAuthor.text")); //$NON-NLS-1$
-		gbc_authorLabel = new GridBagConstraints();
-		gbc_authorLabel.anchor = GridBagConstraints.EAST;
-		gbc_authorLabel.insets = new Insets(5, 5, 5, 5);
-		gbc_authorLabel.gridx = 0;
-		gbc_authorLabel.gridy = 3;
-		getContentPane().add(authorLabel, gbc_authorLabel);
-
-		authorComboBox = new JComboBox<>(new String[]
-		{ "Author1", "Author2", "Author3" });
-		gbc_authorComboBox = new GridBagConstraints();
-		gbc_authorComboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_authorComboBox.insets = new Insets(5, 5, 5, 5);
-		gbc_authorComboBox.gridx = 1;
-		gbc_authorComboBox.gridy = 3;
-		getContentPane().add(authorComboBox, gbc_authorComboBox);
 
 		descriptionLabel = new JLabel(Messages.getString("AddIssueDialogView.lblDescrl.text")); //$NON-NLS-1$
 		gbc_descriptionLabel = new GridBagConstraints();
@@ -187,11 +167,6 @@ public class AddIssueDialogView extends JDialog
 			return -1;
 	}
 
-	public String getIssueAuthor()
-	{
-		String s = authorComboBox.getSelectedItem().toString();
-		return s;
-	}
 
 	public String getIssueDescription()
 	{

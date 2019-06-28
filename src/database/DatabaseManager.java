@@ -21,7 +21,8 @@ public class DatabaseManager
 	private final String LOGIN_CHECK_STATEMENT = "SELECT * FROM users WHERE user_name = ? AND password = ?";
 	private final String GET_RANK_STATEMENT = "SELECT rank FROM users WHERE user_name = ?";
 	private final String CHECK_USER_EXISTS_STATEMENT = "SELECT * FROM users WHERE user_name = ?";
-	private final String GET_ALL_USER_NAMES_STATEMENT = "SELECT user_nmae from users";
+	private final String GET_ALL_USER_NAMES_STATEMENT = "SELECT user_name from users";
+	private final String ADD_RELATION_STATEMENT = "INSERT INTO relation(user_id, issue_id) SELECT usr.user_id, iss.issue_id FROM users usr JOIN issues iss WHERE user_name = ? and title = ?";
 
 	/**
 	 * Provides connection to the SQL server
@@ -147,6 +148,22 @@ public class DatabaseManager
 		}
 	}
 
+	public boolean addRelation(String userName, String issueTitle)
+	{
+		try(Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(ADD_RELATION_STATEMENT))
+		{
+			pstmt.setString(1, userName);
+			pstmt.setString(2, issueTitle);
+			pstmt.executeUpdate();
+			return true;
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
 	public Issue getIssue(String title)
 	{
 		int issueID = -1;
@@ -225,21 +242,21 @@ public class DatabaseManager
 			return null;
 		}
 	}
-	
+
 	public ArrayList<User> getAllUsers()
 	{
 		ArrayList<User> result = new ArrayList<>();
-		
+
 		int user_id = -1;
 		String user_name = "";
 		String password = "";
 		int rank = -1;
-		
+
 		try (Connection conn = this.connect();
 				PreparedStatement pstmt = conn.prepareStatement(GET_ALL_USER_NAMES_STATEMENT))
 		{
 			ResultSet executeQuery = pstmt.executeQuery();
-			while(executeQuery.next())
+			while (executeQuery.next())
 			{
 				user_id = executeQuery.getInt("user_id");
 				user_name = executeQuery.getString("user_name");
@@ -250,12 +267,11 @@ public class DatabaseManager
 			}
 			return result;
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
 			return null;
 		}
-		
-		
+
 	}
 }

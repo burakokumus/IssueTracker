@@ -34,20 +34,20 @@ public class AddIssueDialogController
 		String title = addIssueDialogView.getIssueTitle();
 		String type = addIssueDialogView.getIssueType();
 		int priority = addIssueDialogView.getIssuePriority();
-		String author = addIssueDialogView.getIssueAuthor();
 		String description = addIssueDialogView.getIssueDescription();
 
 		if (priority == -1 || title.trim().length() == 0)
 		{
-			System.out.println(priority + "  " + title);
 			return;
 		}
 
+		String author = mainView.getCurrentUserName();
 		boolean added = dbm.addIssue(title, type, priority, author, description);
 		String message = "";
 		if (added)
 		{
 			message = Messages.getString("issueAdded");
+			dbm.addRelation(mainView.getCurrentUserName(), title);
 			addToJTable(title);
 		}
 		else

@@ -43,9 +43,6 @@ public class Controller
 		addIssueDialogView.showScreen();
 		AddIssueDialogController addIssueDialogController = new AddIssueDialogController(addIssueDialogView, view);
 		addIssueDialogController.initController();
-		/*
-		 * view.getDefaultTableModel().addRow(new Object[] { 1, "Task 1" });
-		 */
 	}
 
 	/**

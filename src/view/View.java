@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -87,6 +89,13 @@ public class View
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 		table.setDefaultRenderer(String.class, centerRenderer);
+		
+		// Make table not editable
+		JTextField tf = new JTextField();
+		tf.setEditable(false);
+		DefaultCellEditor editor = new DefaultCellEditor( tf );
+		table.setDefaultEditor(Object.class, editor);
+		
 		scrollPane.setViewportView(table);
 
 		frame.pack();
@@ -110,6 +119,11 @@ public class View
 	public void setCurrentUserName(String userName)
 	{
 		this.currentUserName = userName;
+	}
+	
+	public String getCurrentUserName()
+	{
+		return this.currentUserName;
 	}
 
 	public void addIssueToJTable(int issueID, String title, String type, int priority, String author,
