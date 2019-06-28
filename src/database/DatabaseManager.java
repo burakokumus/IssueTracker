@@ -16,8 +16,9 @@ public class DatabaseManager
 	private final String URL = "jdbc:sqlite:C:\\Users\\burak\\eclipse-workspace\\IssueTracker\\IssueTrackerDatabase.db";
 	private final String USER_INSERT_STATEMENT = "INSERT INTO users(password, user_name) VALUES(?, ?)";
 	private final String ISSUE_INSERT_STATEMENT = "INSERT INTO issues(title, type, priority, author, description) VALUES(?, ?, ?, ?, ?)";
-	private final String GET_ISSUE_STATEMENT = "SELECT * from issues WHERE title = ?";
+	private final String GET_ISSUE_STATEMENT = "SELECT * FROM issues WHERE title = ?";
 	private final String GET_ALL_ISSUES_STATEMENT = "SELECT * from issues";
+	private final String LOGIN_CHECK = "Select * FROM users WHERE user_name = ? AND password = ?";
 
 	/**
 	 * Provides connection to the SQL server
@@ -36,6 +37,31 @@ public class DatabaseManager
 			System.out.println(e.getMessage());
 		}
 		return conn;
+	}
+
+	public boolean login(String userName, String password)
+	{
+		if (userName.trim().length() == 0 || password.trim().length() == 0)
+			return false;
+		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(LOGIN_CHECK))
+		{
+
+			pstmt.setString(1, userName);
+			pstmt.setString(2, password);
+			ResultSet executeQuery = pstmt.executeQuery();
+			if (executeQuery.next())
+			{
+				return true;
+			}
+
+			return false;
+
+		}
+		catch (SQLException e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 
 	public boolean addUser(String password, String userName)

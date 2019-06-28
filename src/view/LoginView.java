@@ -1,14 +1,14 @@
 package view;
 
-import javax.swing.JDialog;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JPasswordField;
-import javax.swing.JCheckBox;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class LoginView extends JDialog
 {
@@ -23,6 +23,7 @@ public class LoginView extends JDialog
 
 	private void initialize()
 	{
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]
 		{ 0, 0, 0, 0, 0, 0, 0, 0 };
