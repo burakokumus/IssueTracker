@@ -61,7 +61,6 @@ public class AddIssueDialogController
 		if (added && (showOptionDialog == 0 || showOptionDialog == -1))
 		{
 			addIssueDialogView.dispose();
-
 		}
 	}
 

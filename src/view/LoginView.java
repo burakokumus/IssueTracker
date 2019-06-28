@@ -9,12 +9,14 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class LoginView extends JDialog
 {
 	private JTextField idTextField;
 	private JPasswordField passwordField;
 	private JButton loginButton;
+	private JButton signUpButton;
 
 	public LoginView()
 	{
@@ -79,6 +81,15 @@ public class LoginView extends JDialog
 		getContentPane().add(loginButton, gbc_loginButton);
 
 		this.getRootPane().setDefaultButton(loginButton);
+		
+		signUpButton = new JButton("Sign up");
+		signUpButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		GridBagConstraints gbc_signUpButton = new GridBagConstraints();
+		gbc_signUpButton.anchor = GridBagConstraints.EAST;
+		gbc_signUpButton.insets = new Insets(5, 5, 0, 5);
+		gbc_signUpButton.gridx = 5;
+		gbc_signUpButton.gridy = 6;
+		getContentPane().add(signUpButton, gbc_signUpButton);
 		this.setVisible(true);
 		this.pack();
 	}
@@ -102,6 +113,11 @@ public class LoginView extends JDialog
 	public JButton getLoginButton()
 	{
 		return loginButton;
+	}
+	
+	public JButton getSignUpButton()
+	{
+		return signUpButton;
 	}
 
 }

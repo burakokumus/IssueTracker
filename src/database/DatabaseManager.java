@@ -8,18 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Issue;
+import model.User;
 
 public class DatabaseManager
 {
-
 	// Constant SQL statements
 	private final String URL = "jdbc:sqlite:C:\\Users\\burak\\eclipse-workspace\\IssueTracker\\IssueTrackerDatabase.db";
-	private final String USER_INSERT_STATEMENT = "INSERT INTO users(password, user_name) VALUES(?, ?)";
+	private final String USER_INSERT_STATEMENT = "INSERT INTO users(user_name, password) VALUES(?, ?)";
 	private final String ISSUE_INSERT_STATEMENT = "INSERT INTO issues(title, type, priority, author, description) VALUES(?, ?, ?, ?, ?)";
 	private final String GET_ISSUE_STATEMENT = "SELECT * FROM issues WHERE title = ?";
 	private final String GET_ALL_ISSUES_STATEMENT = "SELECT * from issues";
-	private final String LOGIN_CHECK_STATEMENT = "Select * FROM users WHERE user_name = ? AND password = ?";
-	private final String GET_RANK_STATEMENT = "Select rank FROM users WHERE user_name = ?";
+	private final String LOGIN_CHECK_STATEMENT = "SELECT * FROM users WHERE user_name = ? AND password = ?";
+	private final String GET_RANK_STATEMENT = "SELECT rank FROM users WHERE user_name = ?";
+	private final String CHECK_USER_EXISTS_STATEMENT = "SELECT * FROM users WHERE user_name = ?";
+	private final String GET_ALL_USER_NAMES_STATEMENT = "SELECT user_nmae from users";
 
 	/**
 	 * Provides connection to the SQL server
@@ -38,6 +40,28 @@ public class DatabaseManager
 			System.out.println(e.getMessage());
 		}
 		return conn;
+	}
+
+	public boolean checkUserExists(String userName)
+	{
+		if (userName.trim().length() == 0)
+			return true;
+		try (Connection conn = this.connect();
+				PreparedStatement pstmt = conn.prepareStatement(CHECK_USER_EXISTS_STATEMENT))
+		{
+			pstmt.setString(1, userName);
+			ResultSet executeQuery = pstmt.executeQuery();
+			if (executeQuery.next())
+			{
+				return true;
+			}
+			return false;
+		}
+		catch (SQLException e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 
 	public boolean login(String userName, String password)
@@ -64,33 +88,33 @@ public class DatabaseManager
 			return false;
 		}
 	}
-	
+
 	public int getUserRank(String userName)
 	{
 		int result = -1;
-		try(Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(GET_RANK_STATEMENT))
+		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(GET_RANK_STATEMENT))
 		{
 			pstmt.setString(1, userName);
-			
+
 			ResultSet executeQuery = pstmt.executeQuery();
 			if (executeQuery.next())
 			{
 				result = executeQuery.getInt("rank");
 			}
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
 		}
 		return result;
 	}
 
-	public boolean addUser(String password, String userName)
+	public boolean addUser(String userName, String password)
 	{
 		try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(USER_INSERT_STATEMENT))
 		{
-			pstmt.setString(1, password);
-			pstmt.setString(2, userName);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, password);
 			pstmt.executeUpdate();
 			return true;
 
@@ -200,5 +224,38 @@ public class DatabaseManager
 			System.out.println(e.getMessage());
 			return null;
 		}
+	}
+	
+	public ArrayList<User> getAllUsers()
+	{
+		ArrayList<User> result = new ArrayList<>();
+		
+		int user_id = -1;
+		String user_name = "";
+		String password = "";
+		int rank = -1;
+		
+		try (Connection conn = this.connect();
+				PreparedStatement pstmt = conn.prepareStatement(GET_ALL_USER_NAMES_STATEMENT))
+		{
+			ResultSet executeQuery = pstmt.executeQuery();
+			while(executeQuery.next())
+			{
+				user_id = executeQuery.getInt("user_id");
+				user_name = executeQuery.getString("user_name");
+				password = executeQuery.getString("password");
+				rank = executeQuery.getInt("rank");
+				User temp = new User(user_id, user_name, password, rank);
+				result.add(temp);
+			}
+			return result;
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			return null;
+		}
+		
+		
 	}
 }

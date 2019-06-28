@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import database.DatabaseManager;
 import view.LoginView;
 import view.Messages;
+import view.SignupView;
 import view.View;
 
 public class LoginController
@@ -25,14 +26,14 @@ public class LoginController
 	public void initController()
 	{
 		loginView.getLoginButton().addActionListener(e -> login());
+		loginView.getSignUpButton().addActionListener(e -> signup());
 	}
 
 	/**
 	 * Action listener for login button
 	 */
 	private void login()
-	{ // TODO
-
+	{
 		String userName = loginView.getUserName();
 		String password = loginView.getPassword();
 
@@ -48,6 +49,18 @@ public class LoginController
 			JOptionPane.showOptionDialog(loginView, Messages.getString("loginFailed"), "", JOptionPane.DEFAULT_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null, null, null);
 		}
+
+	}
+
+	/**
+	 * Action listener for sign up button
+	 */
+	private void signup()
+	{
+		SignupView signupView = new SignupView();
+		signupView.showScreen();
+		SignupController signupController = new SignupController(signupView);
+		signupController.initController();
 
 	}
 }

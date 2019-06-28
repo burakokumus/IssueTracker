@@ -32,7 +32,7 @@ public class AddUserDialogController
 		{
 			return;
 		}
-		boolean added = dbm.addUser(password, userName);
+		boolean added = dbm.addUser(userName, password);
 		String message = "";
 
 		if (added)
@@ -49,7 +49,6 @@ public class AddUserDialogController
 		if (added && (showOptionDialog == 0 || showOptionDialog == -1))
 		{
 			addUserDialogView.dispose();
-
 		}
 	}
 }
