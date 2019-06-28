@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 public class View
 {
 	private String currentUserName;
-	
+
 	public JFrame frame;
 	public JDialog addIssueDialog;
 	private JTable table;
@@ -28,14 +28,13 @@ public class View
 	private JButton addIssueButton;
 	private JButton addUserButton;
 
-
 	public View()
 	{
 		this.currentUserName = "";
 		initialize();
 	}
-	
-	public void show()
+
+	public void showScreen()
 	{
 		frame.setVisible(true);
 	}
@@ -81,10 +80,10 @@ public class View
 
 		table = new JTable();
 		defaultTableModel = new DefaultTableModel(new String[]
-		{ "Issue Id", "Issue Name" }, 0);
+		{ "Issue Id", "Title", "Type", "Priority", "Author", "Description", "State" }, 0);
 		table.setModel(defaultTableModel);
 		scrollPane.setViewportView(table);
-		
+
 		frame.pack();
 	}
 
@@ -107,6 +106,11 @@ public class View
 	{
 		this.currentUserName = userName;
 	}
-	
 
+	public void addIssueToJTable(int issueID, String title, String type, int priority, String author, String description,
+			String state)
+	{
+		defaultTableModel.addRow(new String[]
+		{ Integer.toString(issueID), title, type, Integer.toString(priority), author, description, state });
+	}
 }

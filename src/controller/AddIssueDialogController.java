@@ -3,8 +3,10 @@ package controller;
 import javax.swing.JOptionPane;
 
 import database.DatabaseManager;
+import model.Issue;
 import view.AddIssueDialogView;
 import view.Messages;
+import view.View;
 
 public class AddIssueDialogController
 {
@@ -12,10 +14,13 @@ public class AddIssueDialogController
 
 	private DatabaseManager dbm;
 
-	public AddIssueDialogController(AddIssueDialogView viewInput)
+	private View mainView;
+
+	public AddIssueDialogController(AddIssueDialogView viewInput, View mainView)
 	{
 		this.addIssueDialogView = viewInput;
 		this.dbm = new DatabaseManager();
+		this.mainView = mainView;
 	}
 
 	public void initController()
@@ -37,13 +42,13 @@ public class AddIssueDialogController
 			System.out.println(priority + "  " + title);
 			return;
 		}
-			
 
 		boolean added = dbm.addIssue(title, type, priority, author, description);
 		String message = "";
 		if (added)
 		{
 			message = Messages.getString("issueAdded");
+			addToJTable(title);
 		}
 		else
 		{
@@ -58,5 +63,13 @@ public class AddIssueDialogController
 			addIssueDialogView.dispose();
 
 		}
+	}
+
+	private void addToJTable(String title)
+	{
+		Issue issue = dbm.getIssue(title);
+		mainView.addIssueToJTable(issue.getId(), issue.getTitle(), issue.getType(), issue.getPriority(),
+				issue.getAuthor(), issue.getDescription(), issue.getState());
+
 	}
 }

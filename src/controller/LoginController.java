@@ -27,6 +27,6 @@ public class LoginController
 		mainController.setCurrentUserName(loginView.getUserName());
 		mainView.setCurrentUserName(loginView.getUserName());
 		loginView.dispose();
-		mainView.show();
+		mainView.showScreen();
 	}
 }
