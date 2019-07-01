@@ -1,17 +1,17 @@
-package view;
+package com.ekinoks.issuetracker.view;
 
-import javax.swing.JDialog;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+@SuppressWarnings("serial")
 public class AddIssueDialogView extends JDialog
 {
 	private GridBagLayout gridBagLayout;

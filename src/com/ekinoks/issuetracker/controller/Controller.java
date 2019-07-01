@@ -1,15 +1,15 @@
-package controller;
+package com.ekinoks.issuetracker.controller;
 
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import database.DatabaseManager;
-import view.AddIssueDialogView;
-import view.AddUserDialogView;
-import view.Messages;
-import view.View;
-import model.Issue;
+import com.ekinoks.issuetracker.database.DatabaseManager;
+import com.ekinoks.issuetracker.model.Issue;
+import com.ekinoks.issuetracker.view.AddIssueDialogView;
+import com.ekinoks.issuetracker.view.AddUserDialogView;
+import com.ekinoks.issuetracker.view.Messages;
+import com.ekinoks.issuetracker.view.View;
 
 public class Controller
 {
@@ -70,7 +70,7 @@ public class Controller
 		this.currentUserName = userName;
 	}
 
-	public String getcurrentUserName()
+	public String getCurrentUserName()
 	{
 		return this.currentUserName;
 	}

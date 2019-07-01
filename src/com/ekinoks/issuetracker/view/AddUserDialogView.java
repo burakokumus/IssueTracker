@@ -1,4 +1,4 @@
-package view;
+package com.ekinoks.issuetracker.view;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class AddUserDialogView extends JDialog
 {
 	private JTextField userNameTextField;

@@ -1,4 +1,4 @@
-package view;
+package com.ekinoks.issuetracker.view;
 
 import java.beans.Beans;
 import java.util.MissingResourceException;
@@ -21,7 +21,7 @@ public class Messages
 	// Bundle access
 	//
 	////////////////////////////////////////////////////////////////////////////
-	private static final String BUNDLE_NAME = "view.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "com.ekinoks.issuetracker.view.messages"; //$NON-NLS-1$
 	private static final ResourceBundle RESOURCE_BUNDLE = loadBundle();
 
 	private static ResourceBundle loadBundle()

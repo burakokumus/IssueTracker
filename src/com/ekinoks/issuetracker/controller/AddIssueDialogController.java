@@ -1,12 +1,13 @@
-package controller;
+package com.ekinoks.issuetracker.controller;
 
 import javax.swing.JOptionPane;
 
-import database.DatabaseManager;
-import model.Issue;
-import view.AddIssueDialogView;
-import view.Messages;
-import view.View;
+import com.ekinoks.issuetracker.database.DatabaseManager;
+import com.ekinoks.issuetracker.model.Issue;
+import com.ekinoks.issuetracker.view.AddIssueDialogView;
+import com.ekinoks.issuetracker.view.Messages;
+import com.ekinoks.issuetracker.view.View;
+
 
 public class AddIssueDialogController
 {

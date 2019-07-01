@@ -1,4 +1,4 @@
-package database;
+package com.ekinoks.issuetracker.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Issue;
-import model.User;
+import com.ekinoks.issuetracker.model.Issue;
+import com.ekinoks.issuetracker.model.User;
 
 public class DatabaseManager
 {

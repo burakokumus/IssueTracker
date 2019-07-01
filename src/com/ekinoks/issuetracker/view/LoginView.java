@@ -1,4 +1,4 @@
-package view;
+package com.ekinoks.issuetracker.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,6 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class LoginView extends JDialog
 {
 	private JTextField idTextField;
@@ -36,7 +37,6 @@ public class LoginView extends JDialog
 		gridBagLayout.rowWeights = new double[]
 		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
-		
 
 		JLabel lblId = new JLabel("ID: ");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
@@ -81,7 +81,7 @@ public class LoginView extends JDialog
 		getContentPane().add(loginButton, gbc_loginButton);
 
 		this.getRootPane().setDefaultButton(loginButton);
-		
+
 		signUpButton = new JButton("Sign up");
 		signUpButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_signUpButton = new GridBagConstraints();
@@ -96,9 +96,9 @@ public class LoginView extends JDialog
 
 	public void hide()
 	{
-		//this.dispose();
+		// this.dispose();
 	}
-	
+
 	public String getUserName()
 	{
 		return idTextField.getText();
@@ -114,7 +114,7 @@ public class LoginView extends JDialog
 	{
 		return loginButton;
 	}
-	
+
 	public JButton getSignUpButton()
 	{
 		return signUpButton;

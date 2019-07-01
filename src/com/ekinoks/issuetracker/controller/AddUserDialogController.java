@@ -1,10 +1,10 @@
-package controller;
+package com.ekinoks.issuetracker.controller;
 
 import javax.swing.JOptionPane;
 
-import database.DatabaseManager;
-import view.AddUserDialogView;
-import view.Messages;
+import com.ekinoks.issuetracker.database.DatabaseManager;
+import com.ekinoks.issuetracker.view.AddUserDialogView;
+import com.ekinoks.issuetracker.view.Messages;
 
 public class AddUserDialogController
 {

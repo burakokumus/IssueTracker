@@ -1,4 +1,4 @@
-package model;
+package com.ekinoks.issuetracker.model;
 
 public class User
 {

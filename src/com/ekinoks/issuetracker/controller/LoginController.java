@@ -1,12 +1,12 @@
-package controller;
+package com.ekinoks.issuetracker.controller;
 
 import javax.swing.JOptionPane;
 
-import database.DatabaseManager;
-import view.LoginView;
-import view.Messages;
-import view.SignupView;
-import view.View;
+import com.ekinoks.issuetracker.database.DatabaseManager;
+import com.ekinoks.issuetracker.view.LoginView;
+import com.ekinoks.issuetracker.view.Messages;
+import com.ekinoks.issuetracker.view.SignupView;
+import com.ekinoks.issuetracker.view.View;
 
 public class LoginController
 {

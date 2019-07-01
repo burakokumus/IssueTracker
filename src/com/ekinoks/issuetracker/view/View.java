@@ -1,4 +1,4 @@
-package view;
+package com.ekinoks.issuetracker.view;
 
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -30,7 +30,6 @@ public class View
 	private JPanel panel;
 	private JButton addIssueButton;
 	private JButton addUserButton;
-	private DefaultTableCellRenderer centerRenderer;
 
 	public View()
 	{
@@ -82,6 +81,7 @@ public class View
 		gbc_scrollPane.gridy = 1;
 		frame.getContentPane().add(scrollPane, gbc_scrollPane);
 
+//		table = new Listtab
 		table = new JTable();
 		defaultTableModel = new DefaultTableModel(new String[]
 		{ "Issue Id", "Title", "Type", "Priority", "Author", "Description", "State" }, 0);
@@ -89,13 +89,13 @@ public class View
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 		table.setDefaultRenderer(String.class, centerRenderer);
-		
+
 		// Make table not editable
 		JTextField tf = new JTextField();
 		tf.setEditable(false);
-		DefaultCellEditor editor = new DefaultCellEditor( tf );
+		DefaultCellEditor editor = new DefaultCellEditor(tf);
 		table.setDefaultEditor(Object.class, editor);
-		
+
 		scrollPane.setViewportView(table);
 
 		frame.pack();
@@ -120,10 +120,15 @@ public class View
 	{
 		this.currentUserName = userName;
 	}
-	
+
 	public String getCurrentUserName()
 	{
 		return this.currentUserName;
+	}
+
+	public JTable getTable()
+	{
+		return table;
 	}
 
 	public void addIssueToJTable(int issueID, String title, String type, int priority, String author,

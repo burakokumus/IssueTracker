@@ -1,11 +1,13 @@
-package main;
+package com.ekinoks.issuetracker.main;
 
 import java.awt.EventQueue;
 
-import controller.Controller;
-import controller.LoginController;
-import view.LoginView;
-import view.View;
+import com.ekinoks.issuetracker.controller.Controller;
+import com.ekinoks.issuetracker.controller.LoginController;
+import com.ekinoks.issuetracker.view.LoginView;
+import com.ekinoks.issuetracker.view.View;
+
+// TODO https://stackoverflow.com/questions/14814492/how-to-create-right-click-menu-in-jtable
 
 public class Main
 {
